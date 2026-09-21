@@ -6,26 +6,30 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="description" content="This is a feed" />
+    <meta name="description" content="A Login form for placeholdername" />
 
-    <title>I dont know | Home or feed or</title>
-    /
+    <title>Name | Login</title>
 
-    <link rel="styles" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
-  <form class="loginform">
-    <h1>Log in</h1>
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" />
-    </div>
+  <body>
+    <main>
+      <form class="loginform">
+        <h1>Log in</h1>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" required/>
+        </div>
 
-    <div>
-      <label for="password">Password</label>
-      <input type="password" id="password" />
-    </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" required/>
+        </div>
 
-    <button type="submit">Login</button>
-  </form>
+        <button type="submit">Login</button>
+      </form>
+    </main>
+    <script type="module" src="..js/login.js"></script>
+  </body>
 </html>
