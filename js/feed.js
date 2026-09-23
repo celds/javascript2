@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const token = localStorage.getItem("accessToken");
 const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
 
@@ -19,20 +13,23 @@ const data = await response.json();
 
 const postContainer = document.querySelector("#posts");
 
-data.data.forEach((post)=> {
+data.data.forEach((post) => {
   const postElement = document.createElement("article");
 
   postElement.innerHTML = `
   <h2>${post.title}</h2>
   <p>${post.body || ""}</p>
 
-    ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
-     : ""
+    ${
+      post.media
+        ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
+        : ""
     }
     <p>Comments: ${post._count.comments}</p>
+    <p>Reactions: ${post._count.reactions}</p>
   `;
 
   postContainer.appendChild(postElement);
-})
+});
 
 console.log(data.data);

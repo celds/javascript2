@@ -23,10 +23,9 @@ form.addEventListener("submit", async (event) => {
 
   if (response.ok) {
     console.log("Login successful!");
-    
 
     localStorage.setItem("accessToken", data.data.accessToken);
-    
+    localStorage.setItem("username", data.data.name);
 
     console.log(data);
 

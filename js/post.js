@@ -33,3 +33,31 @@ postContainer.innerHTML = `
 
   <p>Created: ${new Date(post.created).toLocaleDateString()}</p>
 `;
+
+const reactionsContainer = document.querySelector("#reactions");
+const commentsContainer = document.querySelector("#comments");
+
+if (post.reactions && post.reactions.lenght > 0) {
+  post.reactions.forEach((reaction) => {
+    const reactionElement = document.createElement("span");
+
+    reactionElement.textContent = `${reaction.symbol} ${reaction.count}`;
+
+    reactionsContainer.appendChild(reactionElement);
+  });
+}
+
+if (post.comments) {
+  commentsContainer.innerHTML = "<h2>Comments</h2>";
+
+  post.comments.forEach((comment) => {
+    const commentElement = document.createElement("article");
+
+    commentElement.innerHTML = `
+      <p><strong>${comment.author.name}</strong></p>
+      <p>${comment.body}</p>
+    `;
+
+    commentsContainer.appendChild(commentElement);
+  });
+}
