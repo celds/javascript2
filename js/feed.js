@@ -26,7 +26,10 @@ data.data.forEach((post)=> {
   <h2>${post.title}</h2>
   <p>${post.body || ""}</p>
 
-    ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">` : ""}
+    ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || post.title}">`
+     : ""
+    }
+    <p>Comments: ${post._count.comments}</p>
   `;
 
   postContainer.appendChild(postElement);
