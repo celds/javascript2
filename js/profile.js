@@ -17,7 +17,7 @@ const data = await response.json();
 
 console.log(data);
 
-const profile = data.data;
+const profile = Array.isArray(data.data) ? data.data[0] : data.data;
 
 const profileContainer = document.querySelector("#profile");
 
@@ -39,6 +39,7 @@ profileContainer.innerHTML = `
 
 const postsContainer = document.querySelector("#my-posts");
 
+if (profile.posts && profile.posts.lenght > 0) {
 profile.posts.forEach((post) => {
   const postElement = document.createElement("article");
 
@@ -56,4 +57,14 @@ profile.posts.forEach((post) => {
   `;
 
   postsContainer.appendChild(postElement);
+});
+}
+
+const logoutButton = document.querySelector("#logout");
+
+logoutButton.addEventListener("click", () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("username");
+
+  window.location.href = "../index.html";
 });
