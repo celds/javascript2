@@ -14,13 +14,13 @@ header {
   text-decoration: none;
 }
 
-.header-middle {
+.headmid {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.header-right {
+.authhead {
   display: flex;
   align-items: center;
   gap: 1rem;
