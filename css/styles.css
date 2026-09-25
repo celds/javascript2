@@ -1,0 +1,70 @@
+
+/*header*/
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #999999;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-middle {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header a {
+  text-decoration: none;
+}
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search input {
+  padding: 0.5rem;
+}
+
+.search button {
+  padding: 0.5rem 1rem;
+}
+
+
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid #999999;
+}
+
+
+footer section {
+  flex: 1;
+}
+
+footer h2 {
+  font-size: 1.1rem;
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
