@@ -68,3 +68,43 @@ footer h2 {
 footer p {
   margin: 0.5rem 0;
 }
+
+
+
+
+/* Login + Register */
+
+.loginform,
+.registerform {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 1px solid #999999;
+}
+
+.loginform h1,
+.registerform h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.loginform div,
+.registerform div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.loginform input,
+.registerform input {
+  padding: 0.6rem;
+  box-sizing: border-box;
+}
+
+.loginform button,
+.registerform button {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+}
