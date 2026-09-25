@@ -108,3 +108,54 @@ footer p {
   padding: 0.6rem;
   margin-top: 0.5rem;
 }
+
+
+/* Feed logged in */
+
+#posts {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+#posts > h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#posts article {
+  border: 1px solid #999999;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#posts article h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  
+}
+
+#posts article p {
+  margin: 0.75rem 0;
+  font-size: 1.4rem;
+  overflow-wrap: break-word;
+}
+
+#posts article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+#posts article .post-time {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+#posts article p:nth-last-child(2),
+#posts article p:last-child {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}

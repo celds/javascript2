@@ -15,3 +15,5 @@ if (token) {
     <a href="${inPagesFolder ? "./register.html" : "./pages/register.html"}">Register</a>
   `;
 }
+
+/*søker*/

@@ -1,7 +1,7 @@
 const token = localStorage.getItem("accessToken");
 const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
 
-const response = await fetch("https://v2.api.noroff.dev/social/posts", {
+const response = await fetch("https://v2.api.noroff.dev/social/posts?_author=true", {
   method: "GET",
   headers: {
     Authorization: `Bearer ${token}`,
@@ -10,6 +10,7 @@ const response = await fetch("https://v2.api.noroff.dev/social/posts", {
 });
 
 const data = await response.json();
+console.log(data.data[0]);
 
 const postContainer = document.querySelector("#posts");
 
@@ -17,6 +18,8 @@ data.data.forEach((post) => {
   const postElement = document.createElement("article");
 
   postElement.innerHTML = `
+  <p>@${post.author.name}</p>
+  <p class="post-time">${new Date(post.created).toLocaleString()}</p>
   <h2>${post.title}</h2>
   <p>${post.body || ""}</p>
 
