@@ -55,10 +55,10 @@ profileContainer.innerHTML = `
 const postsContainer = document.querySelector("#my-posts");
 
 if (postsData.data && postsData.data.length > 0) {
-postsData.data.forEach((post) => {
-  const postElement = document.createElement("article");
+  postsData.data.forEach((post) => {
+    const postElement = document.createElement("article");
 
-  postElement.innerHTML = `
+    postElement.innerHTML = `
     <h3>${post.title}</h3>
     <p>${post.body || ""}</p>
 
@@ -69,10 +69,55 @@ postsData.data.forEach((post) => {
     }
 
     <p>Created: ${new Date(post.created).toLocaleDateString()}</p>
-  `;
+    
+    <button class="edit-post" data-id="${post.id}">Edit</button>
 
-postsContainer.appendChild(postElement);
+      <button class="delete-post" data-id="${post.id}">
+    <img src="../icons/delete.png" alt="trashcan icon"> </button>
+
+  
+  `;
+    postsContainer.appendChild(postElement);
+
+    const deleteButton = postElement.querySelector(".delete-post");
+
+    deleteButton.addEventListener("click", async () => {
+      const postId = deleteButton.dataset.id;
+
+      const response = await fetch(
+        `https://v2.api.noroff.dev/social/posts/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "X-Noroff-API-Key": apiKey,
+          },
+        },
+      );
+
+      if (response.ok) {
+        alert("Post deleted!");
+        window.location.reload();
+      } else {
+        alert("Could not delete post.");
+      }
+    });
+const editButton = postElement.querySelector(".edit-post");
+
+editButton.addEventListener("click", () => {
+  const createPostForm = document.querySelector("#create-post-form");
+
+  createPostForm.dataset.editingId = post.id;
+
+  document.querySelector("#post-title").value = post.title;
+  document.querySelector("#post-body").value = post.body || "";
+  document.querySelector("#post-media").value = post.media?.url || "";
+
+  createPostForm.scrollIntoView({
+    behavior: "smooth",
+  });
 });
+  });
 } else {
   postsContainer.innerHTML += "<p>You have no posts</p>";
 }
