@@ -19,6 +19,21 @@ console.log(data);
 
 const profile = Array.isArray(data.data) ? data.data[0] : data.data;
 
+const postsResponse = await fetch(
+  `https://v2.api.noroff.dev/social/profiles/${username}/posts`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+  },
+);
+
+const postsData = await postsResponse.json();
+
+console.log("MY POSTS:", postsData);
+
 const profileContainer = document.querySelector("#profile");
 
 profileContainer.innerHTML = `
@@ -39,8 +54,8 @@ profileContainer.innerHTML = `
 
 const postsContainer = document.querySelector("#my-posts");
 
-if (profile.posts && profile.posts.lenght > 0) {
-profile.posts.forEach((post) => {
+if (postsData.data && postsData.data.length > 0) {
+postsData.data.forEach((post) => {
   const postElement = document.createElement("article");
 
   postElement.innerHTML = `
@@ -56,8 +71,10 @@ profile.posts.forEach((post) => {
     <p>Created: ${new Date(post.created).toLocaleDateString()}</p>
   `;
 
-  postsContainer.appendChild(postElement);
+postsContainer.appendChild(postElement);
 });
+} else {
+  postsContainer.innerHTML += "<p>You have no posts</p>";
 }
 
 const logoutButton = document.querySelector("#logout");
