@@ -1,7 +1,5 @@
 const token = localStorage.getItem("accessToken");
-
 const authHead = document.querySelector(".authhead");
-
 const inPagesFolder = window.location.pathname.includes("/pages/");
 
 
@@ -16,7 +14,22 @@ if (token) {
   `;
 }
 
+const searchForm = document.querySelector("#search-form");
 
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const searchInput = document.querySelector("#search-input");
+  const searchTerm = searchInput.value.trim();
+
+  console.log("Search:", searchTerm);
+
+  if (searchTerm) {
+    window.location.href = inPagesFolder
+      ? `../index.html?search=${encodeURIComponent(searchTerm)}`
+      : `./index.html?search=${encodeURIComponent(searchTerm)}`;
+  }
+});
 
 
 

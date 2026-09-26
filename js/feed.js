@@ -1,7 +1,14 @@
 const token = localStorage.getItem("accessToken");
 const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
+const params = new URLSearchParams(window.location.search);
+const searchTerm = params.get("search");
 
-const response = await fetch("https://v2.api.noroff.dev/social/posts?_author=true", {
+let url = "https://v2.api.noroff.dev/social/posts?_author=true";
+if (searchTerm) {
+  url = `https://v2.api.noroff.dev/social/posts/search?q=${encodeURIComponent(searchTerm)}&_author=true`;
+}
+
+const response = await fetch(url, {
   method: "GET",
   headers: {
     Authorization: `Bearer ${token}`,
