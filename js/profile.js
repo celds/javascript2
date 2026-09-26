@@ -69,6 +69,8 @@ if (postsData.data && postsData.data.length > 0) {
     }
 
     <p>Created: ${new Date(post.created).toLocaleDateString()}</p>
+    <p>Comments: ${post._count.comments}</p>
+    <p>Reactions: ${post._count.reactions}</p>
     
     <button class="edit-post" data-id="${post.id}">Edit</button>
 

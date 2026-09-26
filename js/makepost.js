@@ -48,11 +48,11 @@ createPostForm.addEventListener("submit", async (event) => {
     if (editingId) {
     alert("Post created!");
     } else { alert("post created");
-        
+
     }
     window.location.reload();
   } else {
     alert(data.errors?.[0]?.message || "Could not create post.");
   }
-});
+});   
 

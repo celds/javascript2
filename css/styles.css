@@ -1,4 +1,3 @@
-
 /*header*/
 header {
   display: flex;
@@ -43,8 +42,6 @@ header a {
   padding: 0.5rem 1rem;
 }
 
-
-
 /* Footer */
 
 footer {
@@ -55,7 +52,6 @@ footer {
   margin-top: 3rem;
   border-top: 1px solid #999999;
 }
-
 
 footer section {
   flex: 1;
@@ -68,9 +64,6 @@ footer h2 {
 footer p {
   margin: 0.5rem 0;
 }
-
-
-
 
 /* Login + Register */
 
@@ -109,7 +102,6 @@ footer p {
   margin-top: 0.5rem;
 }
 
-
 /* Feed logged in */
 
 #posts {
@@ -132,7 +124,6 @@ footer p {
 #posts article h2 {
   margin-top: 0;
   font-size: 2rem;
-  
 }
 
 #posts article p {
@@ -158,4 +149,159 @@ footer p {
 #posts article p:last-child {
   font-size: 0.9rem;
   margin-bottom: 0;
+}
+
+/*profile page*/
+
+#profile {
+  max-width: 800px;
+  margin: 2rem auto 1rem;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid #999999;
+}
+
+#profile img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+#profile h1 {
+  margin: 0.5rem 0;
+  font-size: 2.2rem;
+}
+
+#profile p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+#profile p:nth-last-child(3),
+#profile p:nth-last-child(2),
+#profile p:last-child {
+  display: inline-block;
+  margin: 1rem 0.75rem 0;
+  font-size: 1rem;
+}
+
+#my-posts {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+#my-posts > h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#my-posts article {
+  position: relative;
+  border: 1px solid #999999;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#my-posts article h3 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+#my-posts article p {
+  margin: 0.75rem 0;
+  font-size: 1.4rem;
+  overflow-wrap: break-word;
+}
+
+#my-posts article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+#my-posts article p:nth-last-child(2),
+#my-posts article p:last-child {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+#my-posts .post-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#my-posts .edit-post {
+  padding: 0.4rem 0.8rem;
+}
+
+#my-posts .delete-post {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#my-posts .delete-post img {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+#logout {
+  display: block;
+  margin: 1rem auto 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+#create-post {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #999999;
+}
+
+#create-post h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+#create-post-form div {
+  margin-bottom: 1rem;
+}
+
+#create-post-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#create-post-form input,
+#create-post-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem;
+  font: inherit;
+  border: 1px solid #999999;
+}
+
+#create-post-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#create-post-form button {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
 }
