@@ -25,8 +25,8 @@ createPostForm.addEventListener("submit", async (event) => {
   }
 
   const url = editingId
-  ? `https://v2.api.noroff.dev/social/posts/${editingId}`
-  : "https://v2.api.noroff.dev/social/posts";
+    ? `https://v2.api.noroff.dev/social/posts/${editingId}`
+    : "https://v2.api.noroff.dev/social/posts";
 
   const method = editingId ? "PUT" : "POST";
 
@@ -46,13 +46,12 @@ createPostForm.addEventListener("submit", async (event) => {
 
   if (response.ok) {
     if (editingId) {
-    alert("Post created!");
-    } else { alert("post created");
-
+      alert("Post created!");
+    } else {
+      alert("post created");
     }
     window.location.reload();
   } else {
     alert(data.errors?.[0]?.message || "Could not create post.");
   }
-});   
-
+});

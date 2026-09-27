@@ -35,7 +35,7 @@ const postsResponse = await fetch(
   },
 );
 
-const postsData = await postsResponse.json();;
+const postsData = await postsResponse.json();
 
 const profileContainer = document.querySelector("#profile");
 

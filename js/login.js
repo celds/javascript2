@@ -30,6 +30,5 @@ form.addEventListener("submit", async (event) => {
     window.location.href = "../index.html";
   } else {
     console.log("Login failed");
-  
   }
 });

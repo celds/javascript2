@@ -41,9 +41,8 @@ data.data.forEach((post) => {
     <p>Reactions: ${post._count.reactions}</p>
   `;
   postElement.addEventListener("click", () => {
-  window.location.href = `pages/post.html?id=${post.id}`;
-});
+    window.location.href = `pages/post.html?id=${post.id}`;
+  });
 
   postContainer.appendChild(postElement);
 });
-
