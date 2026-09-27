@@ -1,7 +1,7 @@
-console.log("its working yuh");
+import { getToken, getApiKey } from "./auth.js";
 
-const token = localStorage.getItem("accessToken");
-const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
+const token = getToken();
+const apiKey = getApiKey();
 const createPostForm = document.querySelector("#create-post-form");
 
 createPostForm.addEventListener("submit", async (event) => {

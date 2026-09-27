@@ -1,5 +1,7 @@
-const token = localStorage.getItem("accessToken");
-const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
+import { getToken, getApiKey } from "./auth.js";
+
+const token = getToken();
+const apiKey = getApiKey();
 const params = new URLSearchParams(window.location.search);
 const searchTerm = params.get("search");
 
@@ -17,7 +19,6 @@ const response = await fetch(url, {
 });
 
 const data = await response.json();
-console.log(data.data[0]);
 
 const postContainer = document.querySelector("#posts");
 
@@ -39,8 +40,10 @@ data.data.forEach((post) => {
     <p>Comments: ${post._count.comments}</p>
     <p>Reactions: ${post._count.reactions}</p>
   `;
+  postElement.addEventListener("click", () => {
+  window.location.href = `pages/post.html?id=${post.id}`;
+});
 
   postContainer.appendChild(postElement);
 });
 
-console.log(data.data);

@@ -1,9 +1,11 @@
+import { getToken, getApiKey } from "./auth.js";
+
 const params = new URLSearchParams(window.location.search);
 const profileName = params.get("name");
 const isOwnProfile = !profileName;
 const username = profileName || localStorage.getItem("username");
-const token = localStorage.getItem("accessToken");
-const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
+const token = getToken();
+const apiKey = getApiKey();
 
 const response = await fetch(
   `https://v2.api.noroff.dev/social/profiles/${username}`,
@@ -33,9 +35,7 @@ const postsResponse = await fetch(
   },
 );
 
-const postsData = await postsResponse.json();
-
-console.log("MY POSTS:", postsData);
+const postsData = await postsResponse.json();;
 
 const profileContainer = document.querySelector("#profile");
 
@@ -54,6 +54,39 @@ profileContainer.innerHTML = `
   <p>Followers: ${profile._count.followers}</p>
   <p>Following: ${profile._count.following}</p>
 `;
+
+const followButton = document.querySelector("#follow");
+
+if (isOwnProfile) {
+  followButton.style.display = "none";
+} else {
+  followButton.textContent = "Follow";
+
+  followButton.addEventListener("click", async () => {
+    const isFollowing = followButton.textContent === "Following";
+
+    const action = isFollowing ? "unfollow" : "follow";
+
+    const response = await fetch(
+      `https://v2.api.noroff.dev/social/profiles/${username}/${action}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey,
+        },
+      },
+    );
+
+    if (response.ok) {
+      followButton.textContent = isFollowing ? "Follow" : "Following";
+    } else {
+      const data = await response.json();
+      console.log(data);
+      alert("Something went wrong.");
+    }
+  });
+}
 
 const postsContainer = document.querySelector("#my-posts");
 const createPostSection = document.querySelector("#create-post");
@@ -77,21 +110,22 @@ if (postsData.data && postsData.data.length > 0) {
     }
 
     <p>Created: ${new Date(post.created).toLocaleDateString()}</p>
-    <p>Comments: ${post._count.comments}</p>
-    <p>Reactions: ${post._count.reactions}</p>
-    
-    ${
-      isOwnProfile
-        ? `
-    <button class="edit-post" data-id="${post.id}">Edit</button>
-
-      <button class="delete-post" data-id="${post.id}">
-    <img src="../icons/delete.png" alt="trashcan icon"> </button>
-    `
-        : ""
-    }
-
+    <p>Comments: ${post._count?.comments ?? 0}</p>
+    <p>Reactions: ${post._count?.reactions ?? 0}</p>
   
+     ${
+       isOwnProfile
+         ? `
+            <button class="edit-post" data-id="${post.id}">
+              Edit
+            </button>
+
+            <button class="delete-post" data-id="${post.id}">
+              <img src="../icons/delete.png" alt="trashcan icon">
+            </button>
+          `
+         : ""
+     }
   `;
     postsContainer.appendChild(postElement);
 
@@ -137,18 +171,18 @@ if (postsData.data && postsData.data.length > 0) {
     }
   });
 } else {
-  postsContainer.innerHTML += "<p>You have no posts</p>";
+  postsContainer.innerHTML += "<p>no posts yet</p>";
 }
 
 const logoutButton = document.querySelector("#logout");
 
-if(!isOwnProfile) {
-  logoutButton.style.display ="none";
+if (!isOwnProfile) {
+  logoutButton.style.display = "none";
 } else {
-logoutButton.addEventListener("click", () => {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("username");
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("username");
 
-  window.location.href = "../index.html";
-});
+    window.location.href = "../index.html";
+  });
 }

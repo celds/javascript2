@@ -27,11 +27,9 @@ form.addEventListener("submit", async (event) => {
     localStorage.setItem("accessToken", data.data.accessToken);
     localStorage.setItem("username", data.data.name);
 
-    console.log(data);
-
     window.location.href = "../index.html";
   } else {
     console.log("Login failed");
-    console.log(data);
+  
   }
 });

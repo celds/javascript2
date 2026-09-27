@@ -1,11 +1,13 @@
+import { getToken, getApiKey } from "./auth.js";
+
 const params = new URLSearchParams(window.location.search);
 const postId = params.get("id");
 
-const token = localStorage.getItem("accessToken");
-const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
+const token = getToken();
+const apiKey = getApiKey();
 
 const response = await fetch(
-  `https://v2.api.noroff.dev/social/posts/${postId}`,
+  `https://v2.api.noroff.dev/social/posts/${postId}?_comments=true&_reactions=true`,
   {
     method: "GET",
     headers: {
@@ -37,7 +39,7 @@ postContainer.innerHTML = `
 const reactionsContainer = document.querySelector("#reactions");
 const commentsContainer = document.querySelector("#comments");
 
-if (post.reactions && post.reactions.lenght > 0) {
+if (post.reactions && post.reactions.length > 0) {
   post.reactions.forEach((reaction) => {
     const reactionElement = document.createElement("span");
 
