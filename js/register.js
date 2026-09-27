@@ -1,4 +1,4 @@
-console.log("register.js loaded");
+
 
 const form = document.querySelector(".registerform");
 

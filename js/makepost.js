@@ -4,7 +4,13 @@ const token = getToken();
 const apiKey = getApiKey();
 const createPostForm = document.querySelector("#create-post-form");
 
-createPostForm.addEventListener("submit", async (event) => {
+/**
+ * It can both create a new post or update an existing post.
+ * @param {SubmitEvent} event - the form submission event
+ * @returns {Promise<void>} finishes after the request is made
+ */
+
+async function savePost(event) {
   event.preventDefault();
 
   const title = document.querySelector("#post-title").value;
@@ -54,4 +60,6 @@ createPostForm.addEventListener("submit", async (event) => {
   } else {
     alert(data.errors?.[0]?.message || "Could not create post.");
   }
-});
+}
+
+createPostForm.addEventListener("submit", savePost);

@@ -27,5 +27,3 @@ view other people's comments and reactions under a post when you click on the po
 ##Sources for things I have used:
 trashcan icon as a delete button: https://www.flaticon.com/free-icon/delete_6861362
 
-
-remove log

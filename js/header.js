@@ -14,20 +14,23 @@ if (token) {
 }
 
 const searchForm = document.querySelector("#search-form");
+/**
+ * Searches for posts.
+ * @param {SubmitEvent} event - the form submission event.
+ * @returns {void} finish the search.
+ */
 
-searchForm.addEventListener("submit", (event) => {
+function searchPosts(event) {
   event.preventDefault();
 
   const searchInput = document.querySelector("#search-input");
   const searchTerm = searchInput.value.trim();
-
-  console.log("Search:", searchTerm);
 
   if (searchTerm) {
     window.location.href = inPagesFolder
       ? `../index.html?search=${encodeURIComponent(searchTerm)}`
       : `./index.html?search=${encodeURIComponent(searchTerm)}`;
   }
-});
+}
 
-/*søker*/
+searchForm.addEventListener("submit", searchPosts);
