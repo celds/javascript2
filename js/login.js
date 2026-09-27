@@ -1,3 +1,14 @@
+/**
+ * Saves the user's login information in local storage
+ * @param {string} accessToken - the user's access token
+ * @param {string} username - the user's username
+ * @returns {void} saves the login information
+ */
+function saveLogin(accessToken, username) {
+  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("username", username);
+}
+
 const form = document.querySelector(".loginform");
 
 form.addEventListener("submit", async (event) => {
@@ -24,8 +35,7 @@ form.addEventListener("submit", async (event) => {
   if (response.ok) {
     console.log("Login successful!");
 
-    localStorage.setItem("accessToken", data.data.accessToken);
-    localStorage.setItem("username", data.data.name);
+    saveLogin(data.data.accessToken, data.data.name);
 
     window.location.href = "../index.html";
   } else {
