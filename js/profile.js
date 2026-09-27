@@ -1,4 +1,7 @@
-const username = localStorage.getItem("username");
+const params = new URLSearchParams(window.location.search);
+const profileName = params.get("name");
+const isOwnProfile = !profileName;
+const username = profileName || localStorage.getItem("username");
 const token = localStorage.getItem("accessToken");
 const apiKey = "bf7ba992-9ca9-4810-93b1-04b5226b2717";
 
@@ -53,6 +56,11 @@ profileContainer.innerHTML = `
 `;
 
 const postsContainer = document.querySelector("#my-posts");
+const createPostSection = document.querySelector("#create-post");
+
+if (!isOwnProfile) {
+  createPostSection.style.display = "none";
+}
 
 if (postsData.data && postsData.data.length > 0) {
   postsData.data.forEach((post) => {
@@ -72,53 +80,61 @@ if (postsData.data && postsData.data.length > 0) {
     <p>Comments: ${post._count.comments}</p>
     <p>Reactions: ${post._count.reactions}</p>
     
+    ${
+      isOwnProfile
+        ? `
     <button class="edit-post" data-id="${post.id}">Edit</button>
 
       <button class="delete-post" data-id="${post.id}">
     <img src="../icons/delete.png" alt="trashcan icon"> </button>
+    `
+        : ""
+    }
 
   
   `;
     postsContainer.appendChild(postElement);
 
-    const deleteButton = postElement.querySelector(".delete-post");
+    if (isOwnProfile) {
+      const deleteButton = postElement.querySelector(".delete-post");
 
-    deleteButton.addEventListener("click", async () => {
-      const postId = deleteButton.dataset.id;
+      deleteButton.addEventListener("click", async () => {
+        const postId = deleteButton.dataset.id;
 
-      const response = await fetch(
-        `https://v2.api.noroff.dev/social/posts/${postId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey,
+        const response = await fetch(
+          `https://v2.api.noroff.dev/social/posts/${postId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "X-Noroff-API-Key": apiKey,
+            },
           },
-        },
-      );
+        );
 
-      if (response.ok) {
-        alert("Post deleted!");
-        window.location.reload();
-      } else {
-        alert("Could not delete post.");
-      }
-    });
-const editButton = postElement.querySelector(".edit-post");
+        if (response.ok) {
+          alert("Post deleted!");
+          window.location.reload();
+        } else {
+          alert("Could not delete post.");
+        }
+      });
+      const editButton = postElement.querySelector(".edit-post");
 
-editButton.addEventListener("click", () => {
-  const createPostForm = document.querySelector("#create-post-form");
+      editButton.addEventListener("click", () => {
+        const createPostForm = document.querySelector("#create-post-form");
 
-  createPostForm.dataset.editingId = post.id;
+        createPostForm.dataset.editingId = post.id;
 
-  document.querySelector("#post-title").value = post.title;
-  document.querySelector("#post-body").value = post.body || "";
-  document.querySelector("#post-media").value = post.media?.url || "";
+        document.querySelector("#post-title").value = post.title;
+        document.querySelector("#post-body").value = post.body || "";
+        document.querySelector("#post-media").value = post.media?.url || "";
 
-  createPostForm.scrollIntoView({
-    behavior: "smooth",
-  });
-});
+        createPostForm.scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    }
   });
 } else {
   postsContainer.innerHTML += "<p>You have no posts</p>";
@@ -126,9 +142,13 @@ editButton.addEventListener("click", () => {
 
 const logoutButton = document.querySelector("#logout");
 
+if(!isOwnProfile) {
+  logoutButton.style.display ="none";
+} else {
 logoutButton.addEventListener("click", () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("username");
 
   window.location.href = "../index.html";
 });
+}

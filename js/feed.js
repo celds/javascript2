@@ -25,7 +25,8 @@ data.data.forEach((post) => {
   const postElement = document.createElement("article");
 
   postElement.innerHTML = `
-  <p>@${post.author.name}</p>
+  <a href="pages/profile.html?name=${encodeURIComponent(post.author.name)}">
+  @${post.author.name}</a>
   <p class="post-time">${new Date(post.created).toLocaleString()}</p>
   <h2>${post.title}</h2>
   <p>${post.body || ""}</p>

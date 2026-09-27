@@ -9,3 +9,5 @@ https://www.flaticon.com/free-icon/delete_6861362
 to get the feed log in/register
 
 lag søker ting
+
+remove log
